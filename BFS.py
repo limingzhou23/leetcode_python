@@ -40,22 +40,3 @@ class TreeNode:
 #
 #     print(level_order_tree(tree, []))
 #     # [4, 9, 0, 5, 1]
-
-from collections import deque
-
-def bsf_graph(root):
-    if not root:
-        return
-    # queue和seen为一对好基友，同时出现
-    queue = deque([root])
-    # seen避免图遍历过程中重复访问的情况，导致无法跳出循环
-    seen = set([root])
-    while queue:
-        head = queue.popleft()
-        # do somethings with the head node
-        # 将head的邻居都添加进来
-        for neighbor in head.neighbors:
-            if neighbor not in seen:
-                queue.append(neighbor)
-                seen.add(neighbor)
-    return xxx
