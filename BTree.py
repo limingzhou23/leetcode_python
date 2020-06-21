@@ -9,43 +9,43 @@
 class BinatryTree:
     def __init__(self,rootObj):
         self.key = rootObj
-        self.leftChild = None
-        self.rightChild = None
+        self.left = None
+        self.right = None
 
     def insertLeft(self,newNode):
-        if self.leftChild == None:
-            self.leftChild = BinatryTree(newNode)
+        if self.left == None:
+            self.left = BinatryTree(newNode)
         else:
             t = BinatryTree(newNode)
-            t.leftChild = self.leftChild
-            self.leftChild = t
+            t.left = self.left
+            self.left = t
 
     def insertRight(self,newNode):
-        if self.rightChild == None:
-            self.rightChild = BinatryTree(newNode)
+        if self.right == None:
+            self.right = BinatryTree(newNode)
         else:
             t = BinatryTree(newNode)
-            t.rightChild = self.rightChild
-            self.rightChild = t
+            t.right = self.right
+            self.right = t
 
-    def getRootVal(self):
+    def val(self):
         return self.key
 
     def setRootVal(self,obj):
         self.key = obj
 
     def getLeftChild(self):
-        return self.leftChild
+        return self.left
 
     def getRightChild(self):
-        return self.rightChild
+        return self.right
     #前序
     def preorder(self):
         print(self.key)
-        if self.leftChild:
-            self.leftChild.preorder()
-        if self.rightChild:
-            self.rightChild.preorder()
+        if self.left:
+            self.left.preorder()
+        if self.right:
+            self.right.preorder()
 #前序
 def preorder(tree):
     if tree:
@@ -64,11 +64,75 @@ def inorder(tree):
         inorder(tree.getLeftChild())
         print(tree.getRootVal())
         inorder(tree.getRightChild())
+#层序遍历
+def PrintFromTopToBottom(root):
+    ans = []
+    if root == None:
+        return ans
+    else:
+        q = [root]
+        while q:
+            node = q.pop(0)
+            ans.append(node.val)
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)
+        return ans
+
+#层序遍历恢复
+def createtree(l):
+    if l[0]:
+        root = BinatryTree(l[0])
+        nodes = [root]
+        id = 1
+        while nodes and id < len(l):
+            node = nodes[0]  # 依次为每个节点分配子节点
+            node.left = BinatryTree(l[id]) if l[id] else None
+            nodes.append(node.left)
+            node.right = BinatryTree(l[id + 1]) if id < len(l) - 1 and l[id + 1] else None
+            nodes.append(node.right)
+            id += 2  # 每次取出两个节点
+            nodes.pop(0)
+        return root
+    else:
+        return None
 
 
+#######################################################
+#######################################################
+#124 二叉树的最大路径和
+#递归的方法
+class Solution(object):
+    def __init__(self):
+        self.maxSum = float("-inf")
 
+    def maxPathSum(self,root):
+        def dfs(root):
+            if not root :
+                return 0
+            leftmax = max(0,dfs(root.left))
+            rightmax = max(0,dfs(root.right))
 
+            priceNewpath = root.val() + leftmax + rightmax
 
+            self.maxSum = max(self.maxSum,priceNewpath)
+            return root.val() + max(leftmax,rightmax)
+
+        dfs(root)
+        return self.maxSum
+solution = Solution()
+input = [1,2,3]
+root = createtree(input)
+# root = BinatryTree(-10)
+# root.insertLeft(9)
+# root.insertRight(20)
+# root.right.insertLeft(15)
+# root.right.insertRight(7)
+print(solution.maxPathSum(root))
+
+###########################################
+##########################################
 
 
 
