@@ -3,6 +3,7 @@
 #python 3.7.3
 #@Time:2020/6/6 9:52
 
+import bisect
 import collections
 # def longestConsecutive(nums):
 #     """
@@ -23,63 +24,156 @@ import collections
 #         res = max(res, curLen)
 #     return res
 
-class DSU:
-    def __init__(self, nums):
-        self.pre = {num: num for num in nums}
-        self.rank = collections.defaultdict(lambda: 1)
-        self.cnt = collections.defaultdict(lambda: 1)
+# class DSU:
+#     def __init__(self, nums):
+#         self.pre = {num: num for num in nums}
+#         self.rank = collections.defaultdict(lambda: 1)
+#         self.cnt = collections.defaultdict(lambda: 1)
+#
+#     #找到最高级的父亲
+#     def find(self, x):
+#         while x != self.pre[x]:
+#             x = self.pre[x]
+#         return x
+#     #合并两个结点
+#     def merge(self, x, y):
+#         if y not in self.pre:
+#             return 1
+#         root1, root2 = self.find(x), self.find(y)
+#         print(root1,root2)
+#         if root1 == root2:
+#             return self.cnt[root1]
+#         if self.rank[root1] < self.rank[root2]:
+#             self.pre[root1] = root2
+#             self.cnt[root2] += self.cnt[root1]
+#             return self.cnt[root2]
+#         elif self.rank[root1] > self.rank[root2]:
+#             self.pre[root2] = root1
+#             self.cnt[root1] += self.cnt[root2]
+#             return self.cnt[root1]
+#         else:
+#             self.pre[root1] = root2
+#             self.cnt[root2] += self.cnt[root1]
+#             self.rank[root2] += 1
+#             return self.cnt[root2]
+#
+# def longestConsecutive(nums):
+#     dsu = DSU(nums)
+#     res = 0
+#     for num in nums:
+#         res = max(res, dsu.merge(num, num + 1))
+#
+#     return res
+#
+# nums=[100,4,200,1,3,2,55]
+# #print(longestConsecutive(nums))
+#
+# def isPalindrome(x):
+#     if x<0 or (x%10 == 0 and x !=0):
+#         return False
+#
+#     reversenum=0
+#     while x>reversenum :
+#         a=x%10
+#         x=x//10
+#         print(a)
+#         reversenum = reversenum*10+a
+#     print(reversenum)
+#     return x == reversenum or x== reversenum//10
+#
+# #print(isPalindrome(11234))
+# #print(isPalindrome(10))
 
-    #找到最高级的父亲
-    def find(self, x):
-        while x != self.pre[x]:
-            x = self.pre[x]
-        return x
-    #合并两个结点
-    def merge(self, x, y):
-        if y not in self.pre:
-            return 1
-        root1, root2 = self.find(x), self.find(y)
-        print(root1,root2)
-        if root1 == root2:
-            return self.cnt[root1]
-        if self.rank[root1] < self.rank[root2]:
-            self.pre[root1] = root2
-            self.cnt[root2] += self.cnt[root1]
-            return self.cnt[root2]
-        elif self.rank[root1] > self.rank[root2]:
-            self.pre[root2] = root1
-            self.cnt[root1] += self.cnt[root2]
-            return self.cnt[root1]
-        else:
-            self.pre[root1] = root2
-            self.cnt[root2] += self.cnt[root1]
-            self.rank[root2] += 1
-            return self.cnt[root2]
+##########################################################
+#########################################################
+#模式匹配
+#注意逻辑分析
+# class Solution:
+#     def patternMatching(self, pattern,value):
+#         count_a = sum(1 for ch in pattern if ch == 'a')
+#         count_b = len(pattern) - count_a
+#         #后续处理方便 count_a代表多的 count_b代表少的
+#         if count_a < count_b:
+#             count_a, count_b = count_b, count_a
+#             pattern = ''.join('a' if ch == 'b' else 'b' for ch in pattern)
+#
+#         if not value:#如果待匹配的字符串为空 那么要求parttern只能由一种字母
+#             #count_b经处理 代表的是数量少的那个字母
+#             return count_b == 0
+#         if not pattern:
+#             return False
+#
+#         #依次增加’a'分配的长度 例如2个'a' 字符串长12  那么每个'a'分配的就是从0-6个字符串
+#         for len_a in range(len(value) // count_a + 1):
+#             rest = len(value) - count_a * len_a
+#             #如果没有‘b'那么就不能有rest  如果有'b’那么需要保证rest能被'b‘的数量整除
+#             #因为次迭代都是以count_a间隔进行的 因此只要满足上述条件之一 每个'a’一定可以被分配0/1/2...个元素
+#             if (count_b == 0 and rest == 0) or (count_b != 0 and rest % count_b == 0):
+#                 #与'a‘间隔选择同理 保证每次递进每个'b’都可被分配
+#                 len_b = 0 if count_b == 0 else rest // count_b
+#                 pos, correct = 0, True
+#                 value_a, value_b = None, None
+#                 for ch in pattern:
+#                     if ch == 'a':
+#                         sub = value[pos:pos + len_a]
+#                         #切分出一个'a‘对应的字符串
+#                         if not value_a:#value_a还没被分配
+#                             value_a = sub
+#                         elif value_a != sub:#这种分配方式失败
+#                             correct = False
+#                             break
+#                         pos += len_a
+#                     else:
+#                         sub = value[pos:pos + len_b]
+#                         if not value_b:
+#                             value_b = sub
+#                         elif value_b != sub:
+#                             correct = False
+#                             break
+#                         pos += len_b
+#                 #分配正确且不是同一种分配
+#                 if correct and value_a != value_b:
+#                     return True
+#
+#         return False
+#
+# pattern = "abba"
+# value = "dogcatcatdog"
+#pattern = "abba"
+#value = "dogcatcatfish"
+######################################################################
+#######################################################################
+#1300 转变数组元素使其接近目标和
+#双重二分查找枚举法
+class Solution:
+    def findBestValue(self, arr, target):
+        arr.sort()
+        n = len(arr)
+        prefix = [0]
+        for num in arr:
+            prefix.append(prefix[-1] + num)
 
-def longestConsecutive(nums):
-    dsu = DSU(nums)
-    res = 0
-    for num in nums:
-        res = max(res, dsu.merge(num, num + 1))
+        l, r, ans = 0, max(arr), -1
+        while l <= r:
+            mid = (l + r) // 2
+            it = bisect.bisect_left(arr, mid)
+            cur = prefix[it] + (n - it) * mid
+            if cur <= target:
+                ans = mid
+                l = mid + 1
+            else:
+                r = mid - 1
+        #计算元素变化后数组和
+        def check(x):
+            return sum(x if num >= x else num for num in arr)
 
-    return res
+        choose_small = check(ans)
+        choose_big = check(ans + 1)
+        return ans if abs(choose_small - target) <= abs(choose_big - target) else ans + 1
 
-nums=[100,4,200,1,3,2,55]
-#print(longestConsecutive(nums))
 
-def isPalindrome(x):
-    if x<0 or (x%10 == 0 and x !=0):
-        return False
-
-    reversenum=0
-    while x>reversenum :
-        a=x%10
-        x=x//10
-        print(a)
-        reversenum = reversenum*10+a
-    print(reversenum)
-    return x == reversenum or x== reversenum//10
-
-#print(isPalindrome(11234))
-print(isPalindrome(10))
-
+arr = [2,3,5]
+target = 10
+solution = Solution()
+ans = solution.findBestValue(arr,target)
+print(ans)

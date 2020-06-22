@@ -103,40 +103,64 @@ def createtree(l):
 #######################################################
 #124 二叉树的最大路径和
 #递归的方法
-class Solution(object):
-    def __init__(self):
-        self.maxSum = float("-inf")
-
-    def maxPathSum(self,root):
-        def dfs(root):
-            if not root :
-                return 0
-            leftmax = max(0,dfs(root.left))
-            rightmax = max(0,dfs(root.right))
-
-            priceNewpath = root.val() + leftmax + rightmax
-
-            self.maxSum = max(self.maxSum,priceNewpath)
-            return root.val() + max(leftmax,rightmax)
-
-        dfs(root)
-        return self.maxSum
-solution = Solution()
-input = [1,2,3]
-root = createtree(input)
-# root = BinatryTree(-10)
-# root.insertLeft(9)
-# root.insertRight(20)
-# root.right.insertLeft(15)
-# root.right.insertRight(7)
-print(solution.maxPathSum(root))
+# class Solution(object):
+#     def __init__(self):
+#         self.maxSum = float("-inf")
+#
+#     def maxPathSum(self,root):
+#         def dfs(root):
+#             if not root :
+#                 return 0
+#             leftmax = max(0,dfs(root.left))
+#             rightmax = max(0,dfs(root.right))
+#
+#             priceNewpath = root.val() + leftmax + rightmax
+#
+#             self.maxSum = max(self.maxSum,priceNewpath)
+#             return root.val() + max(leftmax,rightmax)
+#
+#         dfs(root)
+#         return self.maxSum
+# solution = Solution()
+# input = [1,2,3]
+# root = createtree(input)
+# # root = BinatryTree(-10)
+# # root.insertLeft(9)
+# # root.insertRight(20)
+# # root.right.insertLeft(15)
+# # root.right.insertRight(7)
+# print(solution.maxPathSum(root))
 
 ###########################################
 ##########################################
+#1028 先序遍历还原二叉树
+#使用栈来保存遍历路径 根据深度插入节点
+class Solution:
+    def recoverFromPreorder(self, S):
+        path, pos = list(), 0
+        while pos < len(S):
+            level = 0
+            while S[pos] == '-':
+                level += 1
+                pos += 1
+            value = 0
+            while pos < len(S) and S[pos].isdigit():
+                value = value * 10 + (ord(S[pos]) - ord('0'))
+                pos += 1
+            node = BinatryTree(value)
+            if level == len(path):
+                if path:
+                    path[-1].left = node
+            else:
+                path = path[:level]
+                path[-1].right = node
+            path.append(node)
+        return path[0]
 
-
-
-
+tree = "1-2--3---4-5--6---7"
+root = "1"
+solution = Solution()
+print(solution.recoverFromPreorder(root).val())
 
 
 
