@@ -145,35 +145,101 @@ import collections
 #######################################################################
 #1300 转变数组元素使其接近目标和
 #双重二分查找枚举法
-class Solution:
-    def findBestValue(self, arr, target):
-        arr.sort()
-        n = len(arr)
-        prefix = [0]
-        for num in arr:
-            prefix.append(prefix[-1] + num)
+# class Solution:
+#     def findBestValue(self, arr, target):
+#         arr.sort()
+#         n = len(arr)
+#         prefix = [0]
+#         for num in arr:
+#             prefix.append(prefix[-1] + num)
+#
+#         l, r, ans = 0, max(arr), -1
+#         while l <= r:
+#             mid = (l + r) // 2
+#             it = bisect.bisect_left(arr, mid)
+#             cur = prefix[it] + (n - it) * mid
+#             if cur <= target:
+#                 ans = mid
+#                 l = mid + 1
+#             else:
+#                 r = mid - 1
+#         #计算元素变化后数组和
+#         def check(x):
+#             return sum(x if num >= x else num for num in arr)
+#
+#         choose_small = check(ans)
+#         choose_big = check(ans + 1)
+#         return ans if abs(choose_small - target) <= abs(choose_big - target) else ans + 1
 
-        l, r, ans = 0, max(arr), -1
-        while l <= r:
-            mid = (l + r) // 2
-            it = bisect.bisect_left(arr, mid)
-            cur = prefix[it] + (n - it) * mid
-            if cur <= target:
-                ans = mid
-                l = mid + 1
-            else:
-                r = mid - 1
-        #计算元素变化后数组和
-        def check(x):
-            return sum(x if num >= x else num for num in arr)
+#################################################################################################
+#################################################################################################
+#二进制相加
+#多看多想
+#有空实现直接相加的方法
+# class Solution:
+#     def addBinary(self, a, b) -> str:
+#         x, y = int(a, 2), int(b, 2)
+#         while y:
+#             print(bin(y)[2:])
+#             print(bin(x)[2:])
+#             print("###########")
+#             answer = x ^ y
+#             carry = (x & y) << 1
+#             x, y = answer, carry
+#         return bin(x)[2:]
+#######################################
+######################################
+#数组相加
+# class Solution(object):
+#     def addToArrayForm(self, A, K):
+#         """
+#         :type A: List[int]
+#         :type K: int
+#         :rtype: List[int]
+#         """
+#
+#
 
-        choose_small = check(ans)
-        choose_big = check(ans + 1)
-        return ans if abs(choose_small - target) <= abs(choose_big - target) else ans + 1
+
+a = '10101'
+b = '10101'
 
 
-arr = [2,3,5]
-target = 10
+
+####################################################
+####################################################
+class Solution(object):
+    def threeSumClosest(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        if len(nums)<3:
+            return 0
+
+        nums.sort()
+        ans = nums[0] + nums[1] + nums[2]
+        for i in range(len(nums)-2):
+            left = i+1
+            right = len(nums) - 1
+            while left <right:
+                sum = nums[right] + nums[left] + nums[i]
+                if abs(sum - target) < abs(ans-target):
+                    ans = sum
+
+                if sum < target:
+                    left+=1
+                elif sum >target:
+                    right-=1
+                else:
+                    return ans
+        return ans
+
+
+
+nums = [-1,2,1,-4]
+target = 1
 solution = Solution()
-ans = solution.findBestValue(arr,target)
+ans = solution.threeSumClosest(nums,target)
 print(ans)

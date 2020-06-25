@@ -28,7 +28,8 @@
 #                     if matches(i, j):
 #                         f[i][j] |= f[i - 1][j - 1]
 #         return f[m][n]
-
+#########################################################################
+#########################################################################
 #44 通配符匹配
 # 给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 '?' 和 '*' 的通配符匹配。
 #
@@ -81,7 +82,8 @@
 #                         d[p_idx - 1][s_idx - 1] and p[p_idx - 1] == s[s_idx - 1]
 #
 #         return d[p_len][s_len]
-
+#######################################################################################
+######################################################################################
 #322找零钱
 # class Solution(object):
 #     def coinChange(self, coins, amount):
@@ -99,22 +101,72 @@
 #         print(dp)
 #         return dp[amount] if dp[amount] != float('inf') else -1
 
+######################################################################
+#####################################################################
 #按摩师
-class Solution(object):
-    def massage(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        if not nums:
-            return 0
-        length = len(nums)
-        dp =[0]*(length+1)
-        dp[1] = nums[0]
-        for i in range(2,length+1):
-            dp[i] = max(dp[i-2]+nums[i-1],dp[i-1])
-        return dp[-1]
+# class Solution(object):
+#     def massage(self, nums):
+#         """
+#         :type nums: List[int]
+#         :rtype: int
+#         """
+#         if not nums:
+#             return 0
+#         length = len(nums)
+#         dp =[0]*(length+1)
+#         dp[1] = nums[0]
+#         for i in range(2,length+1):
+#             dp[i] = max(dp[i-2]+nums[i-1],dp[i-1])
+#         return dp[-1]
+
+########################################################################
+#########################################################################
+#139 单词拆分
+# class Solution(object):
+#     def wordBreak(self, s, wordDict):
+#         """
+#         :type s: str
+#         :type wordDict: List[str]
+#         :rtype: bool
+#         """
+#         dp = [False] * (len(s) + 1)
+#         dp[0] = True
+#         for i in range(len(s)):
+#             if dp[i] == True:
+#                 for j in range(i+1,len(s)+1):
+#                     if s[i:j]  in wordDict:
+#                         dp[j] = True
+#         return dp[-1]
+
+###########################################################################
+##########################################################################
+#140 单词拆分
+from typing import List
+from collections import deque
+
+
+class Solution:
+    def wordBreak(self, s, wordDict):
+        dp = [False] * (len(s) + 1)
+        dp[0] = True
+        for i in range(len(s)):
+            if dp[i] == True:
+                for j in range(i+1,len(s)+1):
+                    if s[i:j]  in wordDict:
+                        dp[j] = True
+
+        ans = []
+        res = []
+        def search(s):
+            for j in range(len(s)+1,-1,-1):
+
+
+
+
 
 solution = Solution()
-coins = [2,7,9,3,1]
-print(solution.massage(coins))
+s = "applepenapple"
+wordDict = ["apple", "pen"]
+# s = "pineapplepenapple"
+# wordDict = ["apple", "pen", "applepen", "pine", "pineapple"]
+print(solution.wordBreak(s,wordDict))
