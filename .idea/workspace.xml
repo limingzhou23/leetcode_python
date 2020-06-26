@@ -20,9 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41d1ca08-f503-4272-a271-d3d3473a72f1" name="Default Changelist" comment="每日题目">
+      <change afterPath="$PROJECT_DIR$/listnode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DynamicProgramming.py" beforeDir="false" afterPath="$PROJECT_DIR$/DynamicProgramming.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/array.py" beforeDir="false" afterPath="$PROJECT_DIR$/array.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592793318945</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="每日题目">
+      <created>1593093724440</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1593093724440</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,10 +245,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1211" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593086289566" />
-    <state x="72" y="256" key="Vcs.Push.Dialog.v2" timestamp="1592793331845">
+    <state x="72" y="256" key="Vcs.Push.Dialog.v2" timestamp="1593093732306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="72" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592793331845" />
+    <state x="72" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593093732306" />
     <state x="273" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593093710991">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
