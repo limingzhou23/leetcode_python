@@ -208,38 +208,62 @@ b = '10101'
 
 ####################################################
 ####################################################
+#16 最接近的三数之和
+# class Solution(object):
+#     def threeSumClosest(self, nums, target):
+#         """
+#         :type nums: List[int]
+#         :type target: int
+#         :rtype: int
+#         """
+#         if len(nums)<3:
+#             return 0
+#
+#         nums.sort()
+#         ans = nums[0] + nums[1] + nums[2]
+#         for i in range(len(nums)-2):
+#             left = i+1
+#             right = len(nums) - 1
+#             while left <right:
+#                 sum = nums[right] + nums[left] + nums[i]
+#                 if abs(sum - target) < abs(ans-target):
+#                     ans = sum
+#
+#                 if sum < target:
+#                     left+=1
+#                 elif sum >target:
+#                     right-=1
+#                 else:
+#                     return ans
+#         return ans
+
+#########################################################
+########################################################
+#41缺失的第一个正数
 class Solution(object):
-    def threeSumClosest(self, nums, target):
+    def firstMissingPositive(self, nums):
         """
         :type nums: List[int]
-        :type target: int
         :rtype: int
         """
-        if len(nums)<3:
-            return 0
+        n = len(nums)
+        for i in range(n):
+            if nums[i] < 0:
+                nums[i] = n+1
+        for i in range(n):
+            num = abs(nums[i])
+            if num <= n:
+                nums[num-1]= -abs(nums[num-1])
 
-        nums.sort()
-        ans = nums[0] + nums[1] + nums[2]
-        for i in range(len(nums)-2):
-            left = i+1
-            right = len(nums) - 1
-            while left <right:
-                sum = nums[right] + nums[left] + nums[i]
-                if abs(sum - target) < abs(ans-target):
-                    ans = sum
-
-                if sum < target:
-                    left+=1
-                elif sum >target:
-                    right-=1
-                else:
-                    return ans
-        return ans
+        for i in range(n):
+            if nums[i] > 0:
+                return i+1
+        return n+1
 
 
 
-nums = [-1,2,1,-4]
-target = 1
+
+nums = [3,4,-1,1]
 solution = Solution()
-ans = solution.threeSumClosest(nums,target)
+ans = solution.firstMissingPositive(nums)
 print(ans)

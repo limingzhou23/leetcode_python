@@ -20,9 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41d1ca08-f503-4272-a271-d3d3473a72f1" name="Default Changelist" comment="每日题目">
-      <change afterPath="$PROJECT_DIR$/listnode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DynamicProgramming.py" beforeDir="false" afterPath="$PROJECT_DIR$/DynamicProgramming.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/array.py" beforeDir="false" afterPath="$PROJECT_DIR$/array.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python.DynamicProgramming">
+  <component name="RunManager" selected="Python.array">
     <configuration name="BTree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="leetcode" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,8 +137,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.DynamicProgramming" />
         <item itemvalue="Python.array" />
+        <item itemvalue="Python.DynamicProgramming" />
         <item itemvalue="Python.BTree" />
         <item itemvalue="Python.string" />
       </list>
@@ -205,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593093724440</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="每日题目">
+      <created>1593136144071</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593136144071</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,30 +235,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="每日题目" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1211" height="281" key="GridCell.Tab.0.bottom" timestamp="1593086289566">
+    <state width="1211" height="297" key="GridCell.Tab.0.bottom" timestamp="1593225897298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1211" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593086289566" />
-    <state width="1211" height="281" key="GridCell.Tab.0.center" timestamp="1593086289566">
+    <state width="1211" height="297" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593225897298" />
+    <state width="1211" height="297" key="GridCell.Tab.0.center" timestamp="1593225897298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1211" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593086289566" />
-    <state width="1211" height="281" key="GridCell.Tab.0.left" timestamp="1593086289565">
+    <state width="1211" height="297" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593225897298" />
+    <state width="1211" height="297" key="GridCell.Tab.0.left" timestamp="1593225897297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1211" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593086289565" />
-    <state width="1211" height="281" key="GridCell.Tab.0.right" timestamp="1593086289566">
+    <state width="1211" height="297" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593225897297" />
+    <state width="1211" height="297" key="GridCell.Tab.0.right" timestamp="1593225897298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1211" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593086289566" />
-    <state x="72" y="256" key="Vcs.Push.Dialog.v2" timestamp="1593093732306">
+    <state width="1211" height="297" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593225897298" />
+    <state x="72" y="256" key="Vcs.Push.Dialog.v2" timestamp="1593136153673">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="72" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593093732306" />
-    <state x="273" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593093710991">
+    <state x="72" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593136153673" />
+    <state x="273" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593226224454">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="273" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593093710991" />
+    <state x="273" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593226224454" />
     <state x="287" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1592790558494">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
