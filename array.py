@@ -240,30 +240,93 @@ b = '10101'
 #########################################################
 ########################################################
 #41缺失的第一个正数
+# class Solution(object):
+#     def firstMissingPositive(self, nums):
+#         """
+#         :type nums: List[int]
+#         :rtype: int
+#         """
+#         n = len(nums)
+#         for i in range(n):
+#             if nums[i] < 0:
+#                 nums[i] = n+1
+#         for i in range(n):
+#             num = abs(nums[i])
+#             if num <= n:
+#                 nums[num-1]= -abs(nums[num-1])
+#
+#         for i in range(n):
+#             if nums[i] > 0:
+#                 return i+1
+#         return n+1
+
+##############################################################
+###############################################################
+#209长度最小的子数组
+# class Solution(object):
+#     def minSubArrayLen(self, s, nums):
+#         """
+#         :type s: int
+#         :type nums: List[int]
+#         :rtype: int
+#         """
+#         if not nums:
+#             return 0
+#
+#         n = len(nums)
+#         ans = n + 1
+#         start, end = 0, 0
+#         total = 0
+#         while end < n:
+#             total += nums[end]
+#             while total >= s:
+#                 ans = min(ans, end - start + 1)
+#                 total -= nums[start]
+#                 start += 1
+#             end += 1
+#
+#         return 0 if ans == n + 1 else ans
+
+##############################################################
+###############################################################
+#215 数组中的第K个最大元素
 class Solution(object):
-    def firstMissingPositive(self, nums):
+    def maxheapfix(self,nums,index,size):
+        l = index * 2 + 1
+        r = index * 2 + 2
+        maxindex = index
+        if l < size and nums[l] > nums[maxindex]:
+            maxindex = l
+        if r < size and nums[r] > nums[maxindex]:
+            maxindex = r
+        if maxindex != index:
+            nums[index],nums[maxindex] = nums[maxindex],nums[index]
+            self.maxheapfix(nums,maxindex,size)
+
+    def buildMaxHeap(self,nums,size):
+        for  i in range(size//2,-1,-1):
+            self.maxheapfix(nums,i,size)
+
+
+    def findKthLargest(self, nums, k):
         """
         :type nums: List[int]
+        :type k: int
         :rtype: int
         """
-        n = len(nums)
-        for i in range(n):
-            if nums[i] < 0:
-                nums[i] = n+1
-        for i in range(n):
-            num = abs(nums[i])
-            if num <= n:
-                nums[num-1]= -abs(nums[num-1])
+        size = len(nums)
+        self.buildMaxHeap(nums,size)
+        for i in range(size-1,size-k,-1):
+            nums[0],nums[i] = nums[i],nums[0]
+            size = size -1
+            self.maxheapfix(nums,0,size)
 
-        for i in range(n):
-            if nums[i] > 0:
-                return i+1
-        return n+1
+        return nums[0]
 
 
 
 
-nums = [3,4,-1,1]
+nums = [3,2,3,1,2,4,5,5,6]
 solution = Solution()
-ans = solution.firstMissingPositive(nums)
+ans = solution.findKthLargest(nums,4)
 print(ans)
