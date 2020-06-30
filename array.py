@@ -5,6 +5,7 @@
 
 import bisect
 import collections
+import heapq
 # def longestConsecutive(nums):
 #     """
 #     :type nums: List[int]
@@ -289,44 +290,33 @@ b = '10101'
 
 ##############################################################
 ###############################################################
-#215 数组中的第K个最大元素
-class Solution(object):
-    def maxheapfix(self,nums,index,size):
-        l = index * 2 + 1
-        r = index * 2 + 2
-        maxindex = index
-        if l < size and nums[l] > nums[maxindex]:
-            maxindex = l
-        if r < size and nums[r] > nums[maxindex]:
-            maxindex = r
-        if maxindex != index:
-            nums[index],nums[maxindex] = nums[maxindex],nums[index]
-            self.maxheapfix(nums,maxindex,size)
-
-    def buildMaxHeap(self,nums,size):
-        for  i in range(size//2,-1,-1):
-            self.maxheapfix(nums,i,size)
-
-
-    def findKthLargest(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
-        size = len(nums)
-        self.buildMaxHeap(nums,size)
-        for i in range(size-1,size-k,-1):
-            nums[0],nums[i] = nums[i],nums[0]
-            size = size -1
-            self.maxheapfix(nums,0,size)
-
-        return nums[0]
+#661图片平滑
+class Solution:
+    def imageSmoother(self, M) :
+        R, C = len(M), len(M[0])
+        ans = [[0] * C for _ in M]
+        dic = [[-1,-1],[-1,0],[-1,1],
+                    [0,-1],[0,0],[0,1],
+                   [1,-1],[1,0],[1,1]]
+        for i in range(R):
+            for j in range(C):
+                count = 0
+                num = 0
+                for ind in dic:
+                    indexi = i + ind[0]
+                    indexj = j + ind[1]
+                    if indexi >=0 and indexj >=0 and indexi < R  and indexj <C:
+                        count +=M[indexi][indexj]
+                        num += 1
+                ans[i][j] = count //num
+        return ans
 
 
-
-
-nums = [3,2,3,1,2,4,5,5,6]
+nums = [[2,3,4],
+        [5,6,7],
+        [8,9,10],
+        [11,12,13],
+        [14,15,16]]
 solution = Solution()
-ans = solution.findKthLargest(nums,4)
+ans = solution.imageSmoother(nums)
 print(ans)
