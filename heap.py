@@ -77,45 +77,77 @@ import heapq
 #             self.minheapfix(arr, 0, size)
 #         return minKlist
 
+##############################################################
+###############################################################
+# class Solution:
+#     def frequencySort(self, s: str) -> str:
+#         # 大顶堆
+#         countFrequency = collections.defaultdict(int)
+#         for i in s:
+#             countFrequency[i] += 1
+#         lst = []
+#         heapq.heapify(lst)
+#
+#         for i in countFrequency:
+#             for j in range(countFrequency[i]):
+#                 heapq.heappush(lst, (-countFrequency[i], i))
+#         return ''.join([heapq.heappop(lst)[1] for _ in range(len(s))])
 
-class Solution:
-    def frequencySort(self, s: str) -> str:
-        # 大顶堆
-        countFrequency = collections.defaultdict(int)
-        for i in s:
-            countFrequency[i] += 1
-        lst = []
-        heapq.heapify(lst)
+############################################################################
+#############################################################################
+# 378 有序矩阵中第K小的元素
+class Solution(object):
+    def kthSmallest(self, matrix, k):
+        """
+        :type matrix: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        uplist = []
+        R,C = len(matrix),len(matrix[0])
+        for i in range(R):
+            for j in range(C):
+                uplist.append(matrix[i][j])
+        heapq.heapify(uplist)
+        for i in range(k-1):
+            heapq.heappop(uplist)
+        return uplist[0]
 
-        for i in countFrequency:
-            for j in range(countFrequency[i]):
-                heapq.heappush(lst, (-countFrequency[i], i))
-        return ''.join([heapq.heappop(lst)[1] for _ in range(len(s))])
+
+nums = [
+    [1, 5, 9],
+    [10, 11, 13],
+    [12, 13, 15]
+]
+k = 3
+solution = Solution()
+ans = solution.kthSmallest(nums, k)
+print(ans)
 
 
-def stringToString(input):
-    return input
-
-
-def main():
-    import sys
-    import io
-    def readlines():
-        for line in io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8'):
-            yield line.strip('\n')
-
-    lines = readlines()
-    while True:
-        try:
-            line = next(lines)
-            s = stringToString(line)
-
-            ret = Solution().frequencySort(s)
-
-            out = (ret)
-            print(out)
-        except StopIteration:
-            break
-
-if __name__ == '__main__':
-    main()
+# def stringToString(input):
+#     return input
+#
+#
+# def main():
+#     import sys
+#     import io
+#     def readlines():
+#         for line in io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8'):
+#             yield line.strip('\n')
+#
+#     lines = readlines()
+#     while True:
+#         try:
+#             line = next(lines)
+#             s = stringToString(line)
+#
+#             ret = Solution().frequencySort(s)
+#
+#             out = (ret)
+#             print(out)
+#         except StopIteration:
+#             break
+#
+# if __name__ == '__main__':
+#     main()

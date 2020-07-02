@@ -189,7 +189,7 @@ import heapq
 #             x, y = answer, carry
 #         return bin(x)[2:]
 #######################################
-######################################
+######################################       ？？？
 #数组相加
 # class Solution(object):
 #     def addToArrayForm(self, A, K):
@@ -201,11 +201,8 @@ import heapq
 #
 #
 
-
 a = '10101'
 b = '10101'
-
-
 
 ####################################################
 ####################################################
@@ -291,32 +288,25 @@ b = '10101'
 ##############################################################
 ###############################################################
 #661图片平滑
-class Solution:
-    def imageSmoother(self, M) :
-        R, C = len(M), len(M[0])
-        ans = [[0] * C for _ in M]
-        dic = [[-1,-1],[-1,0],[-1,1],
-                    [0,-1],[0,0],[0,1],
-                   [1,-1],[1,0],[1,1]]
-        for i in range(R):
-            for j in range(C):
-                count = 0
-                num = 0
-                for ind in dic:
-                    indexi = i + ind[0]
-                    indexj = j + ind[1]
-                    if indexi >=0 and indexj >=0 and indexi < R  and indexj <C:
-                        count +=M[indexi][indexj]
-                        num += 1
-                ans[i][j] = count //num
-        return ans
+# class Solution:
+#     def imageSmoother(self, M) :
+#         R, C = len(M), len(M[0])
+#         ans = [[0] * C for _ in M]
+#         dic = [[-1,-1],[-1,0],[-1,1],
+#                     [0,-1],[0,0],[0,1],
+#                    [1,-1],[1,0],[1,1]]
+#         for i in range(R):
+#             for j in range(C):
+#                 count = 0
+#                 num = 0
+#                 for ind in dic:
+#                     indexi = i + ind[0]
+#                     indexj = j + ind[1]
+#                     if indexi >=0 and indexj >=0 and indexi < R  and indexj <C:
+#                         count +=M[indexi][indexj]
+#                         num += 1
+#                 ans[i][j] = count //num
+#         return ans
 
-
-nums = [[2,3,4],
-        [5,6,7],
-        [8,9,10],
-        [11,12,13],
-        [14,15,16]]
-solution = Solution()
-ans = solution.imageSmoother(nums)
-print(ans)
+##############################################################
+###############################################################
