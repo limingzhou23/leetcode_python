@@ -135,27 +135,32 @@ def createtree(l):
 ##########################################
 #1028 先序遍历还原二叉树
 #使用栈来保存遍历路径 根据深度插入节点
-class Solution:
-    def recoverFromPreorder(self, S):
-        path, pos = list(), 0
-        while pos < len(S):
-            level = 0
-            while S[pos] == '-':
-                level += 1
-                pos += 1
-            value = 0
-            while pos < len(S) and S[pos].isdigit():
-                value = value * 10 + (ord(S[pos]) - ord('0'))
-                pos += 1
-            node = BinatryTree(value)
-            if level == len(path):
-                if path:
-                    path[-1].left = node
-            else:
-                path = path[:level]
-                path[-1].right = node
-            path.append(node)
-        return path[0]
+# class Solution:
+#     def recoverFromPreorder(self, S):
+#         path, pos = list(), 0
+#         while pos < len(S):
+#             level = 0
+#             while S[pos] == '-':
+#                 level += 1
+#                 pos += 1
+#             value = 0
+#             while pos < len(S) and S[pos].isdigit():
+#                 value = value * 10 + (ord(S[pos]) - ord('0'))
+#                 pos += 1
+#             node = BinatryTree(value)
+#             if level == len(path):
+#                 if path:
+#                     path[-1].left = node
+#             else:
+#                 path = path[:level]
+#                 path[-1].right = node
+#             path.append(node)
+#         return path[0]
+
+###########################################
+##########################################
+#
+
 
 tree = "1-2--3---4-5--6---7"
 root = "1"

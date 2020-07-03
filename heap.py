@@ -95,33 +95,44 @@ import heapq
 
 ############################################################################
 #############################################################################
-# 378 有序矩阵中第K小的元素
+# # 378 有序矩阵中第K小的元素
+# class Solution(object):
+#     def kthSmallest(self, matrix, k):
+#         """
+#         :type matrix: List[List[int]]
+#         :type k: int
+#         :rtype: int
+#         """
+#         uplist = []
+#         R,C = len(matrix),len(matrix[0])
+#         for i in range(R):
+#             for j in range(C):
+#                 uplist.append(matrix[i][j])
+#         heapq.heapify(uplist)
+#         for i in range(k-1):
+#             heapq.heappop(uplist)
+#         return uplist[0]
+
+############################################################################
+##########################################################################
+#347 前K个高频元素
 class Solution(object):
-    def kthSmallest(self, matrix, k):
+    def topKFrequent(self, nums, k):
         """
-        :type matrix: List[List[int]]
+        :type nums: List[int]
         :type k: int
-        :rtype: int
+        :rtype: List[int]
         """
-        uplist = []
-        R,C = len(matrix),len(matrix[0])
-        for i in range(R):
-            for j in range(C):
-                uplist.append(matrix[i][j])
-        heapq.heapify(uplist)
-        for i in range(k-1):
-            heapq.heappop(uplist)
-        return uplist[0]
+        if 5&1:
+            print(6|1)
+        count = collections.Counter(nums)
+        print(count.keys())
+        return heapq.nlargest(k, count.keys(),key=count.get)
 
-
-nums = [
-    [1, 5, 9],
-    [10, 11, 13],
-    [12, 13, 15]
-]
+nums = [1,1,1,2,2,3]
 k = 3
 solution = Solution()
-ans = solution.kthSmallest(nums, k)
+ans = solution.topKFrequent(nums, k)
 print(ans)
 
 
