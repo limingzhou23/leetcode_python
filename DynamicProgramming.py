@@ -139,35 +139,75 @@
 #         return dp[-1]
 
 ###########################################################################
-##########################################################################
-#140 单词拆分
+##########################################################################     ??????????????????????????????????????????
+#140 单词拆分                                                                    ????????????????????????????????????????
 from typing import List
 from collections import deque
+# class Solution:
+#     def wordBreak(self, s, wordDict):
+#         dp = [False] * (len(s) + 1)
+#         dp[0] = True
+#         for i in range(len(s)):
+#             if dp[i] == True:
+#                 for j in range(i+1,len(s)+1):
+#                     if s[i:j]  in wordDict:
+#                         dp[j] = True
+#
+#         ans = []
+#         res = []
+#         def search(s):
+#             for j in range(len(s)+1,-1,-1):
+#
 
+###########################################################################
+##########################################################################
+# #32最长有效括号
+# class Solution(object):
+#     def longestValidParentheses(self, s):
+#         """
+#         :type s: str
+#         :rtype: int
+#         """
+#         maxans = 0
+#         n = len(s)
+#         dp = [0] * (n + 1)
+#         for i in range(1,n):
+#             index = i + 1
+#             if s[i] == ')':
+#                 if s[i-1] == '(':
+#                     dp[index] = dp[index-2] + 2
+#                 elif i - dp[index-1] > 0 and s[i - dp[index-1] - 1] == '(':
+#                     dp[index] = dp[index-1] + dp[index - dp[index-1] -2] +2
+#             maxans = max(maxans,dp[index])
+#
+#         return maxans
 
-class Solution:
-    def wordBreak(self, s, wordDict):
-        dp = [False] * (len(s) + 1)
-        dp[0] = True
-        for i in range(len(s)):
-            if dp[i] == True:
-                for j in range(i+1,len(s)+1):
-                    if s[i:j]  in wordDict:
-                        dp[j] = True
+###########################################################################
+##########################################################################
+#一些简单的练手
+class Solution(object):
+    def numMatchingSubseq(self, S, words):
+        ans = 0
+        heads = [[] for _ in range(26)]
+        for word in words:
+            it = iter(word)
+            heads[ord(next(it)) - ord('a')].append(it)
+        for letter in S:
+            letter_index = ord(letter) - ord('a')
+            old_bucket = heads[letter_index]
+            heads[letter_index] = []
 
-        ans = []
-        res = []
-        def search(s):
-            for j in range(len(s)+1,-1,-1):
-                1
+            while old_bucket:
+                it = old_bucket.pop()
+                nxt = next(it, None)  #没有下一个元素时返回None
+                if nxt:
+                    heads[ord(nxt) - ord('a')].append(it)
+                else:
+                    ans += 1
 
-
-
-
+        return ans
 
 solution = Solution()
-s = "applepenapple"
-wordDict = ["apple", "pen"]
-# s = "pineapplepenapple"
-# wordDict = ["apple", "pen", "applepen", "pine", "pineapple"]
-print(solution.wordBreak(s,wordDict))
+S = "abcde"
+words = ["a", "bb", "acd", "ace"]
+print(solution.numMatchingSubseq(S,words))
