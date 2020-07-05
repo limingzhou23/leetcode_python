@@ -1,3 +1,10 @@
+#动态规划的一些练习
+
+from typing import List
+from collections import deque
+import numpy as np
+import math
+
 #10. 正则表达式匹配
 # 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
 #
@@ -141,8 +148,7 @@
 ###########################################################################
 ##########################################################################     ??????????????????????????????????????????
 #140 单词拆分                                                                    ????????????????????????????????????????
-from typing import List
-from collections import deque
+
 # class Solution:
 #     def wordBreak(self, s, wordDict):
 #         dp = [False] * (len(s) + 1)
@@ -186,28 +192,33 @@ from collections import deque
 ##########################################################################
 #一些简单的练手
 class Solution(object):
-    def numMatchingSubseq(self, S, words):
-        ans = 0
-        heads = [[] for _ in range(26)]
-        for word in words:
-            it = iter(word)
-            heads[ord(next(it)) - ord('a')].append(it)
-        for letter in S:
-            letter_index = ord(letter) - ord('a')
-            old_bucket = heads[letter_index]
-            heads[letter_index] = []
+    def matrixBlockSum(self, mat, K):
+        """
+        :type mat: List[List[int]]
+        :type K: int
+        :rtype: List[List[int]]
+        """
+        r,c = len(mat),len(mat[0])
+        P = [[0] * (c+1) for _ in range(r+1)]
+        for i in range(1,r+1):
+            for j in range(1,c+1):
+                P[i][j] =  P[i - 1][j] + P[i][j - 1] - P[i - 1][j - 1] + mat[i - 1][j - 1]
 
-            while old_bucket:
-                it = old_bucket.pop()
-                nxt = next(it, None)  #没有下一个元素时返回None
-                if nxt:
-                    heads[ord(nxt) - ord('a')].append(it)
-                else:
-                    ans += 1
+        def get(x,y):
+            x = max(min(x,r),0)
+            y = max(min(y,c),0)
+            return P[x][y]
 
+        ans = [[0]*c for _ in range(r)]
+        for i in range(r):
+            for j in range(c):
+                ans[i][j] = get(i+K+1,j+K+1) + get(i-K,j-K) -get(i-K,j+K+1) -get(i+K+1,j-K)
         return ans
+
 
 solution = Solution()
 S = "abcde"
 words = ["a", "bb", "acd", "ace"]
-print(solution.numMatchingSubseq(S,words))
+mat = [[1,2,3],[4,5,6],[7,8,9]]
+K = 1
+print(solution.matrixBlockSum(mat,K))
