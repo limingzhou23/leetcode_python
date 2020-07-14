@@ -190,35 +190,85 @@ import math
 
 ###########################################################################
 ##########################################################################
-#一些简单的练手
+# #120 三角形最小路径和
+# class Solution(object):
+#     def minimumTotal(self, triangle):
+#         """
+#         :type triangle: List[List[int]]
+#         :rtype: int
+#         """
+#         n = len(triangle)
+#         dp = [0] * n
+
+###########################################################################
+##########################################################################
+#剑指 Offer 47. 礼物的最大价值
+# class Solution(object):
+#     def maxValue(self, grid):
+#         """
+#         :type grid: List[List[int]]
+#         :rtype: int
+#         """
+#         m,n = len(grid),len(grid[0])
+#         dp = [[0] * n for _ in range(m)]
+#         dp[0][0] = grid[0][0]
+#         for i in range(1,n):
+#             dp[0][i] = dp[0][i-1] + grid[0][i]
+#         for i in range(1,m):
+#             dp[i][0] = dp[i-1][0] + grid[i][0]
+#         for i in range(1,m):
+#             for j in range(1,n):
+#                 dp[i][j] = max(dp[i-1][j],dp[i][j-1]) + grid[i][j]
+#
+#         return dp[-1][-1]
+
+###########################################################################
+##########################################################################
+#714. 买卖股票的最佳时机含手续费
 class Solution(object):
-    def matrixBlockSum(self, mat, K):
+    def maxProfit(self, prices, fee):
         """
-        :type mat: List[List[int]]
-        :type K: int
-        :rtype: List[List[int]]
+        :type prices: List[int]
+        :type fee: int
+        :rtype: int
         """
-        r,c = len(mat),len(mat[0])
-        P = [[0] * (c+1) for _ in range(r+1)]
-        for i in range(1,r+1):
-            for j in range(1,c+1):
-                P[i][j] =  P[i - 1][j] + P[i][j - 1] - P[i - 1][j - 1] + mat[i - 1][j - 1]
+        cash, hold = 0, -prices[0]
+        for i in range(1, len(prices)):
+            cash = max(cash, hold + prices[i] - fee)
+            hold = max(hold, cash - prices[i])
+        return cash
 
-        def get(x,y):
-            x = max(min(x,r),0)
-            y = max(min(y,c),0)
-            return P[x][y]
 
-        ans = [[0]*c for _ in range(r)]
-        for i in range(r):
-            for j in range(c):
-                ans[i][j] = get(i+K+1,j+K+1) + get(i-K,j-K) -get(i-K,j+K+1) -get(i+K+1,j-K)
-        return ans
+###########################################################################
+#########################################################################
+#一些简单的练手
+# class Solution(object):
+#     def matrixBlockSum(self, mat, K):
+#         """
+#         :type mat: List[List[int]]
+#         :type K: int
+#         :rtype: List[List[int]]
+#         """
+#         r,c = len(mat),len(mat[0])
+#         P = [[0] * (c+1) for _ in range(r+1)]
+#         for i in range(1,r+1):
+#             for j in range(1,c+1):
+#                 P[i][j] =  P[i - 1][j] + P[i][j - 1] - P[i - 1][j - 1] + mat[i - 1][j - 1]
+#
+#         def get(x,y):
+#             x = max(min(x,r),0)
+#             y = max(min(y,c),0)
+#             return P[x][y]
+#
+#         ans = [[0]*c for _ in range(r)]
+#         for i in range(r):
+#             for j in range(c):
+#                 ans[i][j] = get(i+K+1,j+K+1) + get(i-K,j-K) -get(i-K,j+K+1) -get(i+K+1,j-K)
+#         return ans
 
 
 solution = Solution()
-S = "abcde"
-words = ["a", "bb", "acd", "ace"]
-mat = [[1,2,3],[4,5,6],[7,8,9]]
-K = 1
-print(solution.matrixBlockSum(mat,K))
+mat = [1, 3, 2, 8, 4, 9]
+fee = 2
+
+print(solution.maxProfit(mat,fee))
